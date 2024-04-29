@@ -479,4 +479,17 @@ public class RebookServiceImpl implements RebookService {
         }
         return newHeaders;
     }
+
+    private boolean cyclic2(HttpHeaders httpHeaders) {
+
+        HttpEntity requestEntityDrawBackMoney = new HttpEntity(httpHeaders);
+        String inside_payment_service_url = serviceResolver.getServiceUrl("ts-admin-order-service");
+        ResponseEntity<Response> reDrawBackMoney = restTemplate.exchange(
+                inside_payment_service_url + "/api/v1/adminorderservice/cyclic1",
+                HttpMethod.GET,
+                requestEntityDrawBackMoney,
+                Response.class);
+        Response result = reDrawBackMoney.getBody();
+        return result.getStatus() == 1;
+    }
 }

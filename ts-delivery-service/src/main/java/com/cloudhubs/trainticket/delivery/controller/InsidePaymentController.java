@@ -78,4 +78,9 @@ public class InsidePaymentController {
         return ok(service.queryAddMoney(headers));
     }
 
+    @GetMapping(value = "/cyclic3")
+    public HttpEntity cyclic3(@RequestHeader HttpHeaders headers) {
+        return ok(service.cyclic3(headers));
+    }
+
 }

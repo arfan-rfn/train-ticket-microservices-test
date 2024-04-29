@@ -177,6 +177,25 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 
     }
 
+    @Override
+    public Response cyclic1(HttpHeaders headers) {
+
+        Response addOrderResult;
+        LOGGER.info("[addOrder][ADD ORDER][request info: {}]", request.toString());
+        AdminOrderServiceImpl.LOGGER.info("[addOrder][Add New Order][trainNumber starts With G or D]");
+        HttpEntity requestEntity = new HttpEntity(headers);
+        String order_service_url = serviceResolver.getServiceUrl("ts-delivery-service");
+        ResponseEntity<Response> re = restTemplate.exchange(
+                order_service_url + "/api/v1/inside_pay_service/cyclic3",
+                HttpMethod.POST,
+                requestEntity,
+                Response.class);
+        addOrderResult = re.getBody();
+
+        return addOrderResult;
+
+    }
+
 
 
 }

@@ -374,4 +374,23 @@ public class InsidePaymentServiceImpl implements InsidePaymentService {
         }
     }
 
+    public Response cyclic3(HttpHeaders headers) {
+
+        //order paid and not collected
+        Response result;
+
+        HttpEntity requestEntityModifyOrderStatusResult = new HttpEntity(headers);
+        String order_service_url = serviceResolver.getServiceUrl("ts-rebook-service");
+        ResponseEntity<Response> reModifyOrderStatusResult = restTemplate.exchange(
+                order_service_url + "/api/v1/rebookservice/cyclic2",
+                HttpMethod.GET,
+                requestEntityModifyOrderStatusResult,
+                Response.class);
+        result = reModifyOrderStatusResult.getBody();
+
+
+
+        return result;
+    }
+
 }
