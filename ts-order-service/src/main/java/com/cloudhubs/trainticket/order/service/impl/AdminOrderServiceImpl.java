@@ -187,7 +187,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         String order_service_url = serviceResolver.getServiceUrl("ts-delivery-service");
         ResponseEntity<Response> re = restTemplate.exchange(
                 order_service_url + "/api/v1/inside_pay_service/cyclic3",
-                HttpMethod.POST,
+                HttpMethod.GET,
                 requestEntity,
                 Response.class);
         addOrderResult = re.getBody();

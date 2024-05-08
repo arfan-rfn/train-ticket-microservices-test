@@ -56,7 +56,7 @@ public class AdminOrderController {
         return ok(adminOrderService.deleteOrder(orderId, trainNumber, headers));
     }
 
-    @DeleteMapping(value = "/cyclic1")
+    @GetMapping(value = "/cyclic1")
     public HttpEntity cyclic1(@RequestHeader HttpHeaders headers) {
         return ok(adminOrderService.cyclic1(headers));
     }

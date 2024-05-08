@@ -41,7 +41,7 @@ public class RebookController {
         return ok(service.rebook(info, headers));
     }
 
-    @PostMapping(value = "/cyclic2")
+    @GetMapping(value = "/cyclic2")
     public HttpEntity cyclic2(@RequestHeader HttpHeaders headers) {
         return ok(service.cyclic2(headers));
     }
