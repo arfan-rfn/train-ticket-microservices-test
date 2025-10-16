@@ -1,27 +1,25 @@
+# HTTP Server
 server:
-  port: 8900
+  port: 12031  # HTTP (Tomcat) port
+
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDRS:127.0.0.1:8848}
   application:
     name: ts-order-service
-  cloud:
-    consul:
-      config:
-        enabled: false
-      discovery:
-        instance-id: ${spring.application.name}-${server.port}-${random.int[1,99]}
-        prefer-ip-address: true
-      host: ${CONSUL_HOST:localhost}
-      port: 8500
-  rabbitmq:
-    host: ${RABBIT_HOST:localhost}
-    port: 5672
   datasource:
+    url: jdbc:mysql://${ORDER_MYSQL_HOST:10.176.122.1}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts}?useSSL=false
+    username: ${ORDER_MYSQL_USER:root}
+    password: ${ORDER_MYSQL_PASSWORD:Abcd1234#}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: admin@123#
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/ts-order-service?createDatabaseIfNotExist=true
-    username: root
-    hikari:
-      maximum-pool-size: 2
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+swagger:
+  controllerPackage: order.controller
